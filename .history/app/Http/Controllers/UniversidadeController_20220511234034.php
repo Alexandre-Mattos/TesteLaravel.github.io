@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Universidades;
+use Illuminate\Http\Request;
+
+class UniversidadeController extends Controller
+{
+    public function load() {
+        $universidades = Universidades::get()->json();
+    }
+}
