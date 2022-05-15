@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -39,8 +38,7 @@ class LoginController extends Controller
                dd ($e->getMessage());
             }
 
-            return view('profile')
-                ->with('user', UserResource::make($user));
+            return view('profile');
         }
 
         return view('login');

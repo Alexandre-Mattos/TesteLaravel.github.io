@@ -105,7 +105,7 @@
                         <div class="extra">
                             <span ><a class="span" href="{{ url('cadastro') }}"> Não é cadastrado?</a></span>
                             <button type="submit">
-                             <a >
+                             <a href="{{ url('universidade')}}">
                                  Login
                              </a>
                             </button>
