@@ -12,6 +12,21 @@
     Desafio muito bacana de fazer, consumo de API externas com formatação para exibição em uma listagem com um conjunto
     de filtros
 
+
+## Installation
+
+    Para rodar o programa:
+        - PHP -v 8.1.0
+        - Wamp;
+        - Ao clonar o repositório e rodar o wamp, rodar os seguintes comandos no terminal:
+            - composer install
+            - copy .env.example .env
+            - php artisan key:generate
+            - php artisan optimize
+            - php artisan serve
+
+    E é para estar o seu servidor local!
+
     
 ## Rotas
   

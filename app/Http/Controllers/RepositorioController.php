@@ -13,9 +13,6 @@ class RepositorioController extends Controller
 
         $repos = collect(json_decode($getRepos->body()));
 
-        \Illuminate\Support\Facades\Log::channel('single')->debug($repos);
-
-
         if( ($request->input('name') != '' || $request->input('name') != null)) {
             $repos = $repos->filter(function ($item) use ($request) {
                 // replace stristr with your choice of matching function
