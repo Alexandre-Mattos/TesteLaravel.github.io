@@ -7,132 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Installation
+## Description
 
-    Download do composer:  https://getcomposer.org/download/ --Versão do php 8.0.13
-
-    Download do wamp: https://sourceforge.net/projects/wampserver/files/WampServer%203/WampServer%203.0.0/wampserver3.2.6_x64.exe/download
-    
-    Download do Laravel: https://laravel.com/docs/9.x/
-
-    Banco de dados usado: https://dbeaver.com/download/
-    Ao criar o banco de dados seguir os seguintes passos:
-        1. Criar como MariaDb
-        2. O nome deve ser TesteLaravel
-            
-
-    Após criar o banco e instalar os requisitos, acesse o terminal e digite:
-        Abrir o wampserver
-
-        Abrir o projeto:
-            composer install
-            php artisan migrate
-            php artisan serve ( http://localhost:8000/ )
+    Desafio muito bacana de fazer, consumo de API externas com formatação para exibição em uma listagem com um conjunto
+    de filtros
 
     
 ## Rotas
-    '/', -> INDEX
-    '/login', -> STORE
-    '/cadastro', -> INDEX, SHOW,STORE
-    '/profile/{id}', -> GET
-    '/universidade', -> INDEX
-    '/universidade-cadastro', -> , STORE
-    '/universidade_user' -> INDEX, STORE, DESTROY
-
-
-
-
-
-
-    
-
-
+  
+    '/repositorios' -> Listagem
 
 
 ## Sobre o Teste
 
-    Você deverá desenvolver em PHP, utilizando Laravel, um pequeno sistema de acesso
-restrito, para o front-end, sinta-se à vontade de utilizar o que desejar.
-Também será importante que você descreva brevemente uma documentação do que você fez
-e que recursos do Laravel você utilizou.
-
-    Escopo:
-        1. Página Login
-            a. Formulário para login através de e-mail e senha.
-            b. “Não é cadastrado?” – Criar conta através de Nome, E-mail e Senha.
-
-        2. Página Bem-vindo / Menu (como desejar implementar)
-            a. Página 1: Importar universidades
-                i. Consumir JSON:
-
-                http://universities.hipolabs.com/search?country=United+States
-                ii. Salvar apenas os 100 primeiros resultados no banco de dados
-
-            b. Página 2: Buscar Universidades
-                i. Através de um campo de texto, o sistema deverá buscar na tabela de
-                universidades o que o usuário digitar
-
-                ii. Apresentar as universidades em uma tabela
-
-                iii. Botão INSCREVER-SE
-                    1. Esse botão fará com que a pessoa se inscreva na
-                    universidade escolhida
-
-            c. Página 3: Adicionar Universidade
-                i. O usuário poderá enviar uma sugestão de Universidade, esse registro
-                ficará como “Aguardando aprovação” na listagem e não será possível
-                Inscrever-se nela.
-
-                ii. Campos:
-                    1. alpha_two_code: string
-                    2. country: string
-                    3. domains: string
-                    4. name: string
-                    5. web_pages: string
-                    d. Página 4: Minhas inscrições
-                    i. Listar as inscrições do usuário
-
-            d. Página 4: Minhas inscrições
-                i. Listar as inscrições do usuário
-                ii. Botão “Remover”
-                    1. Ao clicar, a pessoa remove sua inscrição
-
-            3. API para acesso externo – Login
-                a. Em um exemplo fictício, vamos fornecer uma API para um aplicativo consumir,
-                esta API precisa receber os seguintes campos:
-                    i. E-mail
-                    ii. Senha
-
-                b. Deverá retornar um JSON com os dados do usuário e as universidades que ele
-                se inscreveu.
-
-## Feitos
-
-    1. Página Login
-        a. Criado o formulário ao rodar o programa será a pagina home do projeto;
-        b. Se não tiver usuários cadastrados no banco de dados não será efetuado o login, assim
-        ao clicar no botão "Não é cadastrado?" será direcionado para a página de cadastro.
-
-    2. Importação de Universidades
-        Consumido o json (http://universities.hipolabs.com/search?country=United+States) e 
-        criando as universidades dentro do banco de dados caso já não tenha 100 universidades cadastradas.
-
-    3. Busca de Universidades
-        a. Criado o campo de busca de universidades;
-        b. Ao digitar o nome da universidade será apresentado na tabela;
-        c. Ao clicar no botão "Inscrever-se" será efetuado o relacionamento
-        entre o usuário logado e a universidade escolhida;
-        d. Adicionado também o botão  de cancelar a inscrição na tela de universidades;
-        e. Ao pesquisar por uma universidade, caso queira mostrar todas novamente só clicar
-        no botão de busca com o input vazio.
-
-    4. Adicionar Universidade
-        a. Criado o formulário para adicionar universidades;
-        b. Ao clicar no botão "Adicionar Universidade" será adicionado a universidade
-        no banco de dados;
-        c. O campo alpha two code é necessário ser 2 caracteres, caso não dará erro.
-
-    5. Minhas inscrições
-        a. Criada uma dashboard para o usuário logado, no qual ao clicar no botão profile,
-        será direcionado a uma pagina com os dados do usuário juntamente com as universidades
-        que ele se inscreveu, assim podendo cancelar a inscrição.
+    Somente uma listagem de repositórios pessoais  públicos contendo:
+        1. Funcionalidade de filtro dos repositórios por repositórios arquivados e ativos;
+        2. Funcionalidade de ordenação alfabética e por data do ultimo commit dos repositórios;
+        3. Funcionalidade de pesquisa simples dos repositórios (exemplo, pesquiso por "node" e vejo a lista de repositórios que possuem a string "node" em parte do nome.

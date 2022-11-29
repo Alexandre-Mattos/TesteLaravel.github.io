@@ -98,81 +98,76 @@
         </script>
     </head>
     <body class="antialiased">
-        <div class="flex items-top justify-center  bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <form action="{{ route('profile', auth()->user()->id) }}" method="GET" >
-                {{method_field('GET')}}
-                {{ csrf_field() }}
-                <button type="submit"  > Profile </button>
-            </form>
-        </div>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0" >
             <main>
                 <div class="search-university">
                     <div class="search-university-inputs">
-                    <form class="login-data" action="{{ route('universidade.index')}}" method="GET" >
-                        @csrf
-                        <div class="div-form">
-                            <div class="password-div" style="padding-bottom: 20px;">
-                                <label name="name" style="padding-right: 5px; margin-bottom: 5px;">
-                                    <strong>Name of university: </strong>
-                                </label>
-                                <input class="input-field" type="text" name="name" id="name" placeholder="Enter university name" style="padding-bottom: 5px; margin-bottom: 5px">
-                                <button style="padding: 5px 15px;" type="submit" class="btn btn-primary">
-                                    Search
-                                </button>
-                            </div>
+                        <form class="login-data" action="{{ route('repositorios.index')}}" method="GET" >
+                            @csrf
+                            <div class="div-form">
+                                <div class="password-div" style="padding-bottom: 20px;">
+                                    <label name="name" style="padding-right: 5px; margin-bottom: 5px;">
+                                        <strong>Name of repository: </strong>
+                                    </label>
+                                    <input class="input-field" type="text" name="name" id="name" placeholder="Enter repository name" style="padding-bottom: 5px; margin-bottom: 5px">
 
-                        </div>
+                                </div>
+                            </div>
+                            <div class="div-form">
+                                <div>
+                                    <input type="radio" id="archived" name="archived" value="1">
+                                    <label for="archived">Archived</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" id="orderByAlpha" name="orderByAlpha" value="1">
+                                    <label for="orderByAlpha">Order by alphabetic</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" id="orderByDate" name="orderByDate" value="1">
+                                    <label for="orderByDate">Order by last commit</label>
+                                  </div>
+                            </div>
+                        <button style="padding: 5px 15px;" type="submit" class="btn btn-primary">
+                            Search
+                        </button>
                     </div>
                 </div>
-                <div>
+                {{-- <div>
                     <button style="margin-left: 15px;">
                         <a href="{{ url('universidade-cadastro')}}">
                             Add new university
                         </a>
                     </button>
-                </div>
+                </div> --}}
                 <div class="university-table">
                     <table>
                         <thead>
                             <tr>
                                 <th>Id
                                 <th>Name
-                                <th>Country
-                                <th>Doumains
-                                <th>Web Pages
-                                <th>Status
-                                <th>Inscrição
+                                <th>Owner
+                                <th>Privation
+                                <th>Archived
+                                <th>Visibility
+                                <th>Pushed at
                             <th>
                         </thead>
                         <tbody>
-                            @foreach ($dbUniversidades as $universidade)
+                            @foreach ($repos as $repo)
                             <tr>
-                                <th> {{ $universidade->id }} </th>
-                                <th> {{ $universidade->name }} </th>
-                                <th> {{ $universidade->country }} </th>
-                                <th> {{ $universidade->domains }} </th>
-                                <th> {{ $universidade->web_pages }} </th>
-                                <th> {{ $universidade->status }} </th>
+                                <th> {{ $repo->id }} </th>
+                                <th> {{ $repo->name }} </th>
+                                <th> {{ $repo->owner->login}} </th>
                                 <th>
-                                    @if(auth()->user()->universidades()->where('universidades_users.universidade_id', $universidade->id)->exists())
-                                        <form action="{{ route('universidade_user.destroy', $universidade->id) }}" method="POST" >
-                                            {{method_field('DELETE')}}
-                                            {{ csrf_field() }}
-                                            <button type="submit" style="background-color: blue; padding: 5px 15px ;"  name="universidade_id"> Cancelar </button>
-                                        </form>
-                                    @elseif ($universidade->status == 'Aguardando Aprovacao')
-                                            <button type="button" style="background-color: grey" > Inscrever-se </button>
-                                    @elseif ($universidade->status == 'Inativa')
-                                            <button type="button" style="background-color: grey" > Inscrever-se </button>
+                                    @if ($repo->private)
+                                            <button type="button" style="background-color:red " > Private </button>
                                     @else
-                                        <form action="{{ route('universidade_user.store') }}" method="POST" >
-                                            {{method_field('POST')}}
-                                            {{ csrf_field() }}
-                                            <button type="submit" style="background-color: #EF3B2D"  name="universidade_id" value="{{$universidade->id}}" > Inscrever-se </button>
-                                        </form>
+                                            <button type="button" style="background-color: rgb(41, 194, 41)" > Public </button>
                                     @endif
                                 </th>
+                                <th> {{ $repo->archived}} </th>
+                                <th> {{ $repo->visibility }} </th>
+                                <th> {{  \Carbon\Carbon::parse($repo->pushed_at)->format('d/m/Y') }}</th>
                             </tr>
                             @endforeach
                         </tbody>
